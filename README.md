@@ -2,6 +2,54 @@
 
 Voter-facing mobile application for the QUORUM transaction-backed voting platform.
 
+
+## Project Structure
+
+quorum-mobile/
+├── .env.example
+├── .gitignore
+├── app.json
+├── package.json
+├── tsconfig.json
+├── README.md
+└── src/
+    ├── App.tsx
+    ├── navigation/
+    │   ├── AuthNavigator.tsx
+    │   ├── MainTabs.tsx
+    │   ├── RootNavigator.tsx
+    │   └── types.ts
+    ├── screens/
+    │   ├── auth/
+    │   │   ├── LoginScreen.tsx
+    │   │   └── RegisterScreen.tsx
+    │   ├── main/
+    │   │   ├── CampaignsScreen.tsx
+    │   │   ├── CampaignDetailScreen.tsx
+    │   │   ├── VoteScreen.tsx
+    │   │   ├── WalletScreen.tsx
+    │   │   ├── TransactionHistoryScreen.tsx
+    │   │   └── NotificationsScreen.tsx
+    │   └── funding/
+    │       └── FundWalletScreen.tsx
+    ├── context/
+    │   ├── AuthContext.tsx
+    │   ├── WalletContext.tsx
+    │   └── VotingContext.tsx
+    ├── services/
+    │   ├── api.ts
+    │   ├── storage.ts
+    │   ├── notificationService.ts
+    │   └── voteQueue.ts
+    ├── hooks/
+    │   ├── useAuth.ts
+    │   ├── useWallet.ts
+    │   └── useVoting.ts
+    ├── types/
+    │   └── index.ts
+    └── utils/
+        ├── errorHandler.ts
+        └── idempotency.ts
 ## Features
 
 - User registration & login (JWT)
