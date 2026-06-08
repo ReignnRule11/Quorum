@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
-import { apiClient } from '../../services/api';
-import { useWallet } from '../../hooks/useWallet';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+
+type FundWalletNavProp = NativeStackNavigationProp<RootStackParamList, 'FundWallet'>;
 
 const PACKAGES = [
   { coins: 10, price: 0.10 },
@@ -11,37 +14,26 @@ const PACKAGES = [
 ];
 
 export default function FundWalletScreen() {
-  const [loading, setLoading] = useState(false);
-  const { refreshBalance } = useWallet();
+  const navigation = useNavigation<FundWalletNavProp>();
 
-  const handlePurchase = async (coins: number) => {
-    setLoading(true);
-    try {
-      // Mock payment: call backend to credit wallet (in MVP, backend handles mock webhook)
-      const res = await apiClient.post('/payments/mock', { coins });
-      if (res.data.success) {
-        await refreshBalance();
-        Alert.alert('Success', `${coins} coins added to your wallet.`);
-      } else {
-        throw new Error('Payment failed');
-      }
-    } catch (error: any) {
-      Alert.alert('Error', error.message);
-    } finally {
-      setLoading(false);
-    }
+  const handleSelectPackage = (coins: number) => {
+    navigation.navigate('PaymentMethod');
+    // In a real implementation, pass coins to payment method screen.
+    // Since we need coins available, we can store in context or params.
+    // For simplicity, we'll navigate with params, but we need to modify RootNavigator to pass coins.
+    // Alternative: navigate to PaymentMethod with coins param.
+    navigation.navigate('CardPayment', { coins });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Select Funding Package</Text>
+      <Text style={styles.title}>Select Coin Package</Text>
       {PACKAGES.map((pkg) => (
-        <TouchableOpacity key={pkg.coins} style={styles.card} onPress={() => handlePurchase(pkg.coins)} disabled={loading}>
+        <TouchableOpacity key={pkg.coins} style={styles.card} onPress={() => handleSelectPackage(pkg.coins)}>
           <Text style={styles.coins}>{pkg.coins} coins</Text>
           <Text style={styles.price}>${pkg.price.toFixed(2)}</Text>
         </TouchableOpacity>
       ))}
-      {loading && <ActivityIndicator size="large" style={{ marginTop: 20 }} />}
     </View>
   );
 }
