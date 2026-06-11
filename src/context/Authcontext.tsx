@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import { apiClient, setAuthToken } from '../services/api';
+import { authService } from '../services/authService';
 
 interface User {
   id: string;
@@ -23,38 +22,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadStoredToken();
+    const loadUser = async () => {
+      try {
+        const currentUser = await authService.getCurrentUser();
+        setUser(currentUser);
+      } catch {
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadUser();
   }, []);
 
-  const loadStoredToken = async () => {
-    const token = await SecureStore.getItemAsync('authToken');
-    if (token) {
-      setAuthToken(token);
-      try {
-        const res = await apiClient.get('/auth/me');
-        setUser(res.data);
-      } catch {
-        await SecureStore.deleteItemAsync('authToken');
-      }
-    }
-    setIsLoading(false);
-  };
-
   const signIn = async (email: string, password: string) => {
-    const res = await apiClient.post('/auth/login', { email, password });
-    const { access_token, user } = res.data;
-    await SecureStore.setItemAsync('authToken', access_token);
-    setAuthToken(access_token);
+    const { user } = await authService.login(email, password);
     setUser(user);
   };
 
   const signUp = async (email: string, password: string) => {
-    await apiClient.post('/auth/register', { email, password });
+    await authService.register(email, password);
   };
 
   const signOut = async () => {
-    await SecureStore.deleteItemAsync('authToken');
-    setAuthToken(null);
+    await authService.logout();
     setUser(null);
   };
 
