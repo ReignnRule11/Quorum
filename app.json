@@ -14,16 +14,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.quorum.voting",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "com.quorum.voting"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.quorum.voting",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.quorum.voting"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,6 +29,10 @@
     "plugins": [
       "expo-secure-store",
       "expo-notifications"
-    ]
+    ],
+    "extra": {
+      "apiUrl": "https://quorum-backend-1.onrender.com",
+      "stripePublishableKey": "pk_test_placeholder"
+    }
   }
 }
