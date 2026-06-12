@@ -1,11 +1,21 @@
 # QUORUM Mobile Voting App
 Voter-facing mobile application for the QUORUM transaction-backed voting platform.
+
+
+# QUORUM Mobile Voting App
+
 [![CI](https://github.com/Reignnrule11/quorum-mobile/actions/workflows/ci.yml/badge.svg)](https://github.com/Reignnrule11/quorum-mobile/actions/workflows/ci.yml)
 
 Production-ready mobile client for QUORUM – transaction-backed digital voting.
 
-## Features
+## Tech Stack
+- Expo SDK 54
+- React Native 0.76
+- TypeScript
+- Stripe SDK
+- React Navigation v6
 
+## Features
 - JWT authentication with biometric login
 - Wallet with real-time balance
 - Stripe card payments
@@ -14,13 +24,6 @@ Production-ready mobile client for QUORUM – transaction-backed digital voting.
 - Offline vote queue with auto-retry
 - Push notifications
 - Full transaction history
-- User registration & login (JWT)
-- Browse active campaigns and nominees
-- Cast votes (1 coin = 1 vote) with atomic transaction
-- Offline vote queueing and retry
-- Push notifications for vote confirmations, low balance, campaign ending
-- Transaction history & audit trail
-
 
 ## Setup
 
@@ -35,6 +38,12 @@ Production-ready mobile client for QUORUM – transaction-backed digital voting.
 |----------|-------------|
 | `API_URL` | Backend REST API URL |
 | `STRIPE_PUBLISHABLE_KEY` | Stripe public key (test or live) |
+
+## Building for Production
+```bash
+eas build --platform android --profile production
+eas build --platform ios --profile production
+
 
 ## Building for Production
 ```bash
