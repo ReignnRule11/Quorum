@@ -8,8 +8,14 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build": "eas build",
-    "test": "jest",
-    "lint": "eslint src --ext .ts,.tsx"
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "lint:check": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf node_modules && npm cache clean --force",
+    "reset": "expo start -c",
+    "prebuild": "npm run typecheck && npm run lint:check"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
