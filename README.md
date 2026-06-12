@@ -1,64 +1,110 @@
-# QUORUM Mobile App
-
+# QUORUM Mobile Voting App
 Voter-facing mobile application for the QUORUM transaction-backed voting platform.
+[![CI](https://github.com/Reignnrule11/quorum-mobile/actions/workflows/ci.yml/badge.svg)](https://github.com/Reignnrule11/quorum-mobile/actions/workflows/ci.yml)
 
+Production-ready mobile client for QUORUM – transaction-backed digital voting.
 
-## Project Structure
-
-quorum-mobile/
-├── .env.example
-├── .gitignore
-├── app.json
-├── package.json
-├── tsconfig.json
-├── README.md
-└── src/
-    ├── App.tsx
-    ├── navigation/
-    │   ├── AuthNavigator.tsx
-    │   ├── MainTabs.tsx
-    │   ├── RootNavigator.tsx
-    │   └── types.ts
-    ├── screens/
-    │   ├── auth/
-    │   │   ├── LoginScreen.tsx
-    │   │   └── RegisterScreen.tsx
-    │   ├── main/
-    │   │   ├── CampaignsScreen.tsx
-    │   │   ├── CampaignDetailScreen.tsx
-    │   │   ├── VoteScreen.tsx
-    │   │   ├── WalletScreen.tsx
-    │   │   ├── TransactionHistoryScreen.tsx
-    │   │   └── NotificationsScreen.tsx
-    │   └── funding/
-    │       └── FundWalletScreen.tsx
-    ├── context/
-    │   ├── AuthContext.tsx
-    │   ├── WalletContext.tsx
-    │   └── VotingContext.tsx
-    ├── services/
-    │   ├── api.ts
-    │   ├── storage.ts
-    │   ├── notificationService.ts
-    │   └── voteQueue.ts
-    ├── hooks/
-    │   ├── useAuth.ts
-    │   ├── useWallet.ts
-    │   └── useVoting.ts
-    ├── types/
-    │   └── index.ts
-    └── utils/
-        ├── errorHandler.ts
-        └── idempotency.ts
 ## Features
 
+- JWT authentication with biometric login
+- Wallet with real-time balance
+- Stripe card payments
+- Bank transfer with receipt upload
+- Atomic voting (1 coin = 1 vote)
+- Offline vote queue with auto-retry
+- Push notifications
+- Full transaction history
 - User registration & login (JWT)
-- Wallet funding (mock provider for MVP)
 - Browse active campaigns and nominees
 - Cast votes (1 coin = 1 vote) with atomic transaction
 - Offline vote queueing and retry
 - Push notifications for vote confirmations, low balance, campaign ending
 - Transaction history & audit trail
+
+
+## Setup
+
+1. Clone repo
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env` and fill in your backend URL and Stripe publishable key
+4. Generate asset placeholders: `chmod +x generate-assets.sh && ./generate-assets.sh`
+5. Start development: `npm start`
+
+## Environment Variables
+| Variable | Description |
+|----------|-------------|
+| `API_URL` | Backend REST API URL |
+| `STRIPE_PUBLISHABLE_KEY` | Stripe public key (test or live) |
+
+## Building for Production
+```bash
+eas build --platform android --profile production
+eas build --platform ios --profile production
+
+## Project Structure
+quorum-mobile/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── eas-build.yml
+├── .env.example
+├── .gitignore
+├── app.config.js
+├── eas.json
+├── package.json
+├── tsconfig.json
+├── README.md
+├── generate-assets.sh
+├── assets/
+│   ├── icon.png
+│   ├── splash.png
+│   ├── adaptive-icon.png
+│   └── favicon.png
+├── src/
+│   ├── App.tsx
+│   ├── navigation/
+│   │   ├── AuthNavigator.tsx
+│   │   ├── MainTabs.tsx
+│   │   ├── RootNavigator.tsx
+│   │   └── types.ts
+│   ├── screens/
+│   │   ├── auth/
+│   │   │   ├── LoginScreen.tsx
+│   │   │   └── RegisterScreen.tsx
+│   │   ├── main/
+│   │   │   ├── CampaignsScreen.tsx
+│   │   │   ├── CampaignDetailScreen.tsx
+│   │   │   ├── VoteScreen.tsx
+│   │   │   ├── WalletScreen.tsx
+│   │   │   ├── TransactionHistoryScreen.tsx
+│   │   │   └── NotificationsScreen.tsx
+│   │   └── funding/
+│   │       ├── FundWalletScreen.tsx
+│   │       ├── PaymentMethodScreen.tsx
+│   │       ├── CardPaymentScreen.tsx
+│   │       └── BankTransferScreen.tsx
+│   ├── context/
+│   │   ├── AuthContext.tsx
+│   │   ├── WalletContext.tsx
+│   │   └── VotingContext.tsx
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── authService.ts
+│   │   ├── storage.ts
+│   │   ├── notificationService.ts
+│   │   └── voteQueue.ts
+│   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useWallet.ts
+│   │   └── useVoting.ts
+│   ├── types/
+│   │   └── index.ts
+│   └── utils/
+│       ├── errorHandler.ts
+│       └── idempotency.ts
+└── .expo-shared/
+    └── assets.json
+
 
 ## Tech Stack
 
