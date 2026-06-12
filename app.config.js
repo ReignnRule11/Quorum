@@ -2,38 +2,51 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: "QUORUM Voting",
-    slug: "quorum-mobile",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/icon.png",
-    userInterfaceStyle: "light",
+    name: 'QUORUM Voting',
+    slug: 'quorum-mobile',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    userInterfaceStyle: 'light',
     splash: {
-      image: "./assets/splash.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff"
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff'
     },
-    assetBundlePatterns: ["**/*"],
+    assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.quorum.voting",
-      buildNumber: "1"
+      bundleIdentifier: 'com.quorum.voting',
+      buildNumber: '1'
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: "./assets/adaptive-icon.png",
-        backgroundColor: "#ffffff"
+        foregroundImage: './assets/adaptive-icon.png',
+        backgroundColor: '#ffffff'
       },
-      package: "com.quorum.voting",
+      package: 'com.quorum.voting',
       versionCode: 1
     },
     web: {
-      favicon: "./assets/favicon.png"
+      favicon: './assets/favicon.png'
     },
     plugins: [
-      "expo-secure-store",
-      "expo-notifications",
-      "expo-local-authentication"
+      'expo-secure-store',
+      'expo-notifications',
+      'expo-local-authentication',
+      [
+        'expo-build-properties',
+        {
+          android: {
+            minSdkVersion: 23,
+            targetSdkVersion: 34,
+            compileSdkVersion: 34
+          },
+          ios: {
+            deploymentTarget: '13.4'
+          }
+        }
+      ]
     ],
     extra: {
       apiUrl: process.env.API_URL,
