@@ -105,44 +105,41 @@ quorum-mobile/
 └── .expo-shared/
     └── assets.json
 
-
 ## Tech Stack
-
-- React Native (Expo SDK 49)
+- Expo SDK 54
+- React Native 0.76
 - TypeScript
+- Stripe SDK
 - React Navigation v6
-- Axios for API calls
-- AsyncStorage for offline queue
-- SecureStore for token storage
-- Expo Notifications
+
+## Features
+- JWT authentication with biometric login
+- Wallet with real-time balance
+- Stripe card payments
+- Bank transfer with receipt upload
+- Atomic voting (1 coin = 1 vote)
+- Offline vote queue with auto-retry
+- Push notifications
+- Full transaction history
 
 ## Setup
 
-1. Install dependencies:
-   ```bash
-   npm install
-```
+1. Clone repo
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env` and fill in your backend URL and Stripe publishable key
+4. Generate asset placeholders: `chmod +x generate-assets.sh && ./generate-assets.sh`
+5. Start development: `npm start`
 
-   1. Copy .env.example to .env and set API_URL to your backend URL.
-2. Start the development server:
-   ```bash
-   npm start
-   ```
-3. Run on device:
-   · iOS: npm run ios
-   · Android: npm run android
+## Environment Variables
+| Variable | Description |
+|----------|-------------|
+| https://quorum-backend-1.onrender.com | Backend REST API URL |
+| `STRIPE_PUBLISHABLE_KEY` | Stripe public key (test or live) |
 
-Environment Variables
-
-Variable Description
-API_URL Backend REST API base URL (e.g., http://localhost:3000)
-
-Building for Production
-
+## Building for Production
 ```bash
-eas build --platform android
-eas build --platform ios
-```
+eas build --platform android --profile production
+eas build --platform ios --profile production
 
 Offline Behaviour
 
