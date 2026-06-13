@@ -14,11 +14,12 @@ export default {
       backgroundColor: '#ffffff'
     },
     assetBundlePatterns: ['**/*'],
-    ios: {
-      supportsTablet: true,
-      bundleIdentifier: 'com.quorum.voting',
-      buildNumber: '1'
-    },
+   ios: {
+  supportsTablet: true,
+  bundleIdentifier: "com.quorum.voting",
+  buildNumber: "1",
+  deploymentTarget: "15.1"   // <-- changed from 13.4 to 15.1
+},
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
