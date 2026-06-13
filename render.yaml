@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: quorum-web
+    runtime: static
+    buildCommand: npm install && npx expo export:web
+    publishDirectory: dist
+    envVars:
+      - key: API_URL
+        value: https://quorum-backend-1.onrender.com
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false  # You will set this manually in Render dashboard
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
