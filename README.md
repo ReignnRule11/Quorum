@@ -2,7 +2,7 @@
 Voter-facing mobile application for the QUORUM transaction-backed voting platform.
 
 
-[![CI](https://github.com/ReignnRule11/quorum-mobile/actions/workflows/ci.yml/badge.svg)](https://github.com/ReignnRule11/quorum-mobile/actions/workflows/ci.yml)
+[![CI](https://github.com/ReignnRule11/Quorum/actions/workflows/ci.yml/badge.svg)](https://github.com/ReignnRule11/Quorum/actions/workflows/ci.yml)
 
 Production-ready mobile client for QUORUM – transaction-backed digital voting.
 
